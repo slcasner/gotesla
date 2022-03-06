@@ -205,6 +205,17 @@ func main() {
 			log.Printf("SOE: %f\n", soe)
 		}
 
+		// Get vitals from the Powerwall+ solar inverter -
+		// current, voltage, power and status.
+		vd, err := gotesla.GetVitals(client, hostname, pwa)
+		if err != nil {
+			log.Printf("GetVitals: %v\n", err)
+			continue
+		}
+		if verbose {
+			log.Printf("Vitals: %+v\n", vd)
+		}
+
 		// Get the grid status
 		// We define that within the gotesla package as a
 		// scalar (see the declaration of GridStatus), but note
@@ -340,6 +351,52 @@ func main() {
 				tags,
 				fields,
 				now,
+			)
+			if err != nil {
+				log.Printf("NewPoint: %v\n", err)
+				continue
+			}
+			bp.AddPoint(pt)
+		}
+
+		// Create a point with the solar inverter current, voltage, power and status variables
+		{
+			tags := map[string]string{}
+
+			fields := map[string]interface{}{
+				"i_out":          vd.PVACs[0].PVACIout,
+				"current_a":      vd.PVACs[0].PVACPVCurrentA,
+				"current_b":      vd.PVACs[0].PVACPVCurrentB,
+				"current_c":      vd.PVACs[0].PVACPVCurrentC,
+				"current_d":      vd.PVACs[0].PVACPVCurrentD,
+				"voltage_a":      vd.PVACs[0].PVACPVMeasuredVoltageA,
+				"voltage_b":      vd.PVACs[0].PVACPVMeasuredVoltageB,
+				"voltage_c":      vd.PVACs[0].PVACPVMeasuredVoltageC,
+				"voltage_d":      vd.PVACs[0].PVACPVMeasuredVoltageD,
+				"power_a":        vd.PVACs[0].PVACPVMeasuredPowerA,
+				"power_b":        vd.PVACs[0].PVACPVMeasuredPowerB,
+				"power_c":        vd.PVACs[0].PVACPVMeasuredPowerC,
+				"power_d":        vd.PVACs[0].PVACPVMeasuredPowerD,
+				"p_out":          vd.PVACs[0].PVACPout,
+				"pv_state":       vd.PVACs[0].PVACState,
+				"grid_state":     vd.PVACs[0].PVACGridState,
+				"inverter_state": vd.PVACs[0].PVACInvState,
+				"pv_state_a":     vd.PVACs[0].PVACPvStateA,
+				"pv_state_b":     vd.PVACs[0].PVACPvStateB,
+				"pv_state_c":     vd.PVACs[0].PVACPvStateC,
+				"pv_state_d":     vd.PVACs[0].PVACPvStateD,
+			}
+			timestamp := time.Unix(int64(vd.PVACs[0].Common.LastCommunicationTime), 0)
+			if err != nil {
+				log.Printf("time.Parse: %v\n", err)
+				continue
+			}
+
+			pt, err := influxClient.NewPoint(
+				InfluxMeasurement,
+				tags,
+				fields,
+				timestamp,
 			)
 			if err != nil {
 				log.Printf("NewPoint: %v\n", err)
