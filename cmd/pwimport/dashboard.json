@@ -8,15 +8,23 @@
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
         "type": "dashboard"
       }
     ]
   },
   "editable": true,
+  "fiscalYearStartMonth": 0,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 6,
+  "id": 1,
   "links": [],
+  "liveNow": false,
   "panels": [
     {
       "cacheTimeout": null,
@@ -26,20 +34,15 @@
         "defaults": {
           "mappings": [
             {
-              "$$hashKey": "object:811",
-              "id": 0,
-              "op": "=",
-              "text": "Stopped",
-              "type": 1,
-              "value": "0"
-            },
-            {
-              "$$hashKey": "object:812",
-              "id": 1,
-              "op": "=",
-              "text": "Running",
-              "type": 1,
-              "value": "1"
+              "options": {
+                "0": {
+                  "text": "Stopped"
+                },
+                "1": {
+                  "text": "Running"
+                }
+              },
+              "type": "value"
             }
           ],
           "thresholds": {
@@ -93,7 +96,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -147,11 +150,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "max": 1,
@@ -198,7 +203,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -255,28 +260,34 @@
         "defaults": {
           "mappings": [
             {
-              "$$hashKey": "object:1157",
-              "from": "100",
-              "id": 0,
-              "text": "Discharge",
-              "to": "100000",
-              "type": 2
+              "options": {
+                "from": 100,
+                "result": {
+                  "text": "Discharge"
+                },
+                "to": 100000
+              },
+              "type": "range"
             },
             {
-              "$$hashKey": "object:1158",
-              "from": "-100000",
-              "id": 1,
-              "text": "Charge",
-              "to": "-100",
-              "type": 2
+              "options": {
+                "from": -100000,
+                "result": {
+                  "text": "Charge"
+                },
+                "to": -100
+              },
+              "type": "range"
             },
             {
-              "$$hashKey": "object:1159",
-              "from": "-99.9999",
-              "id": 2,
-              "text": "Standby",
-              "to": "99.9999",
-              "type": 2
+              "options": {
+                "from": -99.9999,
+                "result": {
+                  "text": "Standby"
+                },
+                "to": 99.9999
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -330,7 +341,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -390,11 +401,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "max": 15000,
@@ -441,7 +454,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -501,11 +514,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "max": 6000,
@@ -548,7 +563,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -608,11 +623,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "max": 15000,
@@ -659,7 +676,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -722,10 +739,6 @@
         "fontWeight": "normal",
         "showDate": true
       },
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 8,
@@ -745,9 +758,11 @@
           "dateFormat": "YYYY-MM-DD",
           "fontSize": "20px",
           "fontWeight": "normal",
+          "locale": "",
           "showDate": false
         },
         "mode": "time",
+        "refresh": "dashboard",
         "timeSettings": {
           "fontSize": "36px",
           "fontWeight": "normal"
@@ -760,6 +775,7 @@
           "zoneFormat": "offsetAbbv"
         }
       },
+      "pluginVersion": "1.2.0",
       "refreshSettings": {
         "syncWithDashboard": true
       },
@@ -824,28 +840,34 @@
         "defaults": {
           "mappings": [
             {
-              "$$hashKey": "object:883",
-              "from": "1",
-              "id": 0,
-              "text": "Down",
-              "to": "1",
-              "type": 2
+              "options": {
+                "from": 1,
+                "result": {
+                  "text": "Down"
+                },
+                "to": 1
+              },
+              "type": "range"
             },
             {
-              "$$hashKey": "object:884",
-              "from": "2",
-              "id": 1,
-              "text": "In Recovery",
-              "to": "2",
-              "type": 2
+              "options": {
+                "from": 2,
+                "result": {
+                  "text": "In Recovery"
+                },
+                "to": 2
+              },
+              "type": "range"
             },
             {
-              "$$hashKey": "object:885",
-              "from": "3",
-              "id": 2,
-              "text": "Up",
-              "to": "3",
-              "type": 2
+              "options": {
+                "from": 3,
+                "result": {
+                  "text": "Up"
+                },
+                "to": 3
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -899,7 +921,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -949,20 +971,15 @@
         "defaults": {
           "mappings": [
             {
-              "$$hashKey": "object:1269",
-              "id": 0,
-              "op": "=",
-              "text": "Down",
-              "type": 1,
-              "value": "0"
-            },
-            {
-              "$$hashKey": "object:1270",
-              "id": 1,
-              "op": "=",
-              "text": "Up",
-              "type": 1,
-              "value": "1"
+              "options": {
+                "0": {
+                  "text": "Down"
+                },
+                "1": {
+                  "text": "Up"
+                }
+              },
+              "type": "value"
             }
           ],
           "thresholds": {
@@ -1016,7 +1033,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1067,12 +1084,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "$$hashKey": "object:530",
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1126,7 +1144,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1184,12 +1202,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "$$hashKey": "object:255",
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1243,7 +1262,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1301,12 +1320,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "$$hashKey": "object:138",
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1360,7 +1380,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1418,12 +1438,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "$$hashKey": "object:451",
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -1477,7 +1498,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1527,13 +1548,237 @@
       "type": "stat"
     },
     {
+      "cacheTimeout": null,
       "datasource": "InfluxDB for Tesla",
-      "description": "Instant voltage from Powerwall site meter (nominal 120V +/- 5%).",
+      "description": "Current solar inverter MPPT states.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "mappings": [
+            {
+              "options": {
+                "PV_Active": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Active"
+                },
+                "PV_Disabled": {
+                  "color": "dark-red",
+                  "index": 0,
+                  "text": "Disabled"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 3,
+        "x": 2,
+        "y": 5
+      },
+      "id": 45,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^powerwall\\.last$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 18
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pv_state_a"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pv_state_b"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pv_state_c"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pv_state_d"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "MPPT State",
+      "type": "stat"
+    },
+    {
+      "datasource": "InfluxDB for Tesla",
+      "description": "Instant voltage from Powerwall site meter (nominal 240V +/- 5%).",
       "fieldConfig": {
         "defaults": {
           "mappings": [],
-          "max": 140,
-          "min": 100,
+          "max": 280,
+          "min": 200,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -1543,19 +1788,19 @@
               },
               {
                 "color": "orange",
-                "value": 107
+                "value": 214
               },
               {
                 "color": "green",
-                "value": 114
+                "value": 228
               },
               {
                 "color": "orange",
-                "value": 126
+                "value": 252
               },
               {
                 "color": "red",
-                "value": 133
+                "value": 266
               }
             ]
           },
@@ -1583,7 +1828,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1623,7 +1868,7 @@
             {
               "key": "meter",
               "operator": "=",
-              "value": "site"
+              "value": "battery"
             }
           ]
         }
@@ -1645,11 +1890,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "max": 10000,
@@ -1696,7 +1943,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1806,7 +2053,7 @@
         "showThresholdMarkers": true,
         "text": {}
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1846,7 +2093,7 @@
             {
               "key": "meter",
               "operator": "=",
-              "value": "load"
+              "value": "battery"
             }
           ]
         }
@@ -1862,28 +2109,34 @@
         "defaults": {
           "mappings": [
             {
-              "$$hashKey": "object:998",
-              "from": "-100000",
-              "id": 0,
-              "text": "Feed",
-              "to": "-100",
-              "type": 2
+              "options": {
+                "from": -100000,
+                "result": {
+                  "text": "Feed"
+                },
+                "to": -100
+              },
+              "type": "range"
             },
             {
-              "$$hashKey": "object:999",
-              "from": "-100",
-              "id": 1,
-              "text": "Standby",
-              "to": "100",
-              "type": 2
+              "options": {
+                "from": -100,
+                "result": {
+                  "text": "Standby"
+                },
+                "to": 100
+              },
+              "type": "range"
             },
             {
-              "$$hashKey": "object:1000",
-              "from": "100",
-              "id": 2,
-              "text": "Backfeed",
-              "to": "100000",
-              "type": 2
+              "options": {
+                "from": 100,
+                "result": {
+                  "text": "Backfeed"
+                },
+                "to": 100000
+              },
+              "type": "range"
             }
           ],
           "thresholds": {
@@ -1937,7 +2190,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -1994,18 +2247,176 @@
     {
       "cacheTimeout": null,
       "datasource": "InfluxDB for Tesla",
+      "description": "Current solar inverter state.",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "fixed"
+          },
+          "mappings": [
+            {
+              "options": {
+                "INV_Grid_Connected": {
+                  "color": "green",
+                  "index": 1,
+                  "text": "Grid Connected"
+                },
+                "PVAC_Active": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "Active"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "#333333",
+                "value": -99.9999
+              },
+              {
+                "color": "#5794F2",
+                "value": 100
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 2,
+        "x": 5,
+        "y": 6
+      },
+      "id": 44,
+      "interval": null,
+      "links": [],
+      "maxDataPoints": 100,
+      "options": {
+        "colorMode": "background",
+        "fieldOptions": {
+          "calcs": [
+            "lastNotNull"
+          ]
+        },
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "horizontal",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/^powerwall\\.last$/",
+          "values": false
+        },
+        "text": {
+          "valueSize": 24
+        },
+        "textMode": "value"
+      },
+      "pluginVersion": "8.2.2",
+      "targets": [
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "inverter_state"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ]
+        },
+        {
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pv_state"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Solar State",
+      "type": "stat"
+    },
+    {
+      "cacheTimeout": null,
+      "datasource": "InfluxDB for Tesla",
       "description": "Energy backfed to grid over this time period.",
       "fieldConfig": {
         "defaults": {
           "decimals": 1,
           "mappings": [
             {
-              "$$hashKey": "object:609",
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -2059,7 +2470,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -2117,12 +2528,13 @@
           "decimals": 1,
           "mappings": [
             {
-              "$$hashKey": "object:334",
-              "id": 0,
-              "op": "=",
-              "text": "N/A",
-              "type": 1,
-              "value": "null"
+              "options": {
+                "match": "null",
+                "result": {
+                  "text": "N/A"
+                }
+              },
+              "type": "special"
             }
           ],
           "thresholds": {
@@ -2176,7 +2588,7 @@
         "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "targets": [
         {
           "groupBy": [
@@ -2236,10 +2648,6 @@
       "dashes": false,
       "datasource": "InfluxDB for Tesla",
       "description": "Historical value of power meters and battery state of energy.",
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
@@ -2270,7 +2678,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.5.6",
+      "pluginVersion": "8.2.2",
       "pointradius": 5,
       "points": false,
       "renderer": "flot",
@@ -2419,6 +2827,713 @@
       }
     },
     {
+      "aliasColors": {
+        "load": "dark-blue",
+        "site": "#ffffffff",
+        "solar": "yellow"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB for Tesla",
+      "description": "Historical value of power produced by each MPPT of the Powerwall+ solar inverter.",
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "hiddenSeries": false,
+      "id": 43,
+      "interval": "",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 327,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.2.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:283",
+          "alias": "SOE",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "A",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "power_a"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "B",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT mean(\"soe\") FROM \"autogen\".\"powerwall\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "power_b"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "C",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "power_c"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "D",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "power_d"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Powerwall+ Inverter MPPTs",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:264",
+          "format": "watt",
+          "label": "Power",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "$$hashKey": "object:265",
+          "decimals": 0,
+          "format": "short",
+          "label": "State of energy",
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": false
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "A": "green",
+        "A A": "#7eb26d",
+        "A V": "#7eb26d",
+        "B": "orange",
+        "B A": "#EAB839",
+        "B V": "#eab839",
+        "C": "light-blue",
+        "C A": "#6ed0e0",
+        "C V": "#6ed0e0",
+        "D": "semi-dark-orange",
+        "D A": "#ef843c",
+        "D V": "#ef843c",
+        "load": "dark-blue",
+        "site": "#ffffffff",
+        "solar": "yellow"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "InfluxDB for Tesla",
+      "description": "Historical value of power produced by each MPPT of the Powerwall+ solar inverter.",
+      "fill": 0,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "hiddenSeries": false,
+      "id": 46,
+      "interval": "",
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 276,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "8.2.2",
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [
+        {
+          "$$hashKey": "object:283",
+          "alias": "SOE",
+          "yaxis": 2
+        },
+        {
+          "alias": "A",
+          "yaxis": 2
+        },
+        {
+          "alias": "B",
+          "yaxis": 2
+        },
+        {
+          "alias": "C",
+          "yaxis": 2
+        },
+        {
+          "alias": "D",
+          "yaxis": 2
+        },
+        {
+          "alias": "A V",
+          "yaxis": 2
+        },
+        {
+          "alias": "B V",
+          "yaxis": 2
+        },
+        {
+          "alias": "C V",
+          "yaxis": 2
+        },
+        {
+          "alias": "D V",
+          "yaxis": 2
+        }
+      ],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "A A",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "current_a"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "B A",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "query": "SELECT mean(\"soe\") FROM \"autogen\".\"powerwall\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
+          "rawQuery": false,
+          "refId": "B",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "current_b"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "C A",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "C",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "current_c"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "D A",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "D",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "current_d"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "A V",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "E",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "voltage_a"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "B V",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "F",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "voltage_b"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "C V",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "G",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "voltage_c"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        },
+        {
+          "alias": "D V",
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "hide": false,
+          "measurement": "powerwall",
+          "orderByTime": "ASC",
+          "policy": "autogen",
+          "refId": "H",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "voltage_d"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Powerwall+ Inverter MPPTs",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "$$hashKey": "object:264",
+          "decimals": null,
+          "format": "amp",
+          "label": "DC Current",
+          "logBase": 1,
+          "max": "35",
+          "min": "0",
+          "show": true
+        },
+        {
+          "$$hashKey": "object:265",
+          "decimals": null,
+          "format": "volt",
+          "label": "DC Voltage",
+          "logBase": 1,
+          "max": "500",
+          "min": "-200",
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
       "backgroundColor": "rgba(128,128,128,0.1)",
       "cacheTimeout": null,
       "colorMaps": [
@@ -2449,15 +3564,11 @@
       "display": "timeline",
       "expandFromQueryS": 0,
       "extendLastValue": true,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 2,
         "x": 0,
-        "y": 19
+        "y": 37
       },
       "highlightOnMouseover": true,
       "id": 40,
@@ -2565,6 +3676,7 @@
       "title": "Grid",
       "type": "natel-discrete-panel",
       "units": "short",
+      "use12HourClock": false,
       "useTimePrecision": false,
       "valueMaps": [
         {
@@ -2628,15 +3740,11 @@
       "display": "timeline",
       "expandFromQueryS": 0,
       "extendLastValue": true,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 2,
         "x": 2,
-        "y": 19
+        "y": 37
       },
       "highlightOnMouseover": true,
       "id": 41,
@@ -2762,6 +3870,7 @@
       "title": "Grid Flow",
       "type": "natel-discrete-panel",
       "units": "short",
+      "use12HourClock": false,
       "useTimePrecision": false,
       "valueMaps": [
         {
@@ -2802,15 +3911,11 @@
       "display": "timeline",
       "expandFromQueryS": 0,
       "extendLastValue": true,
-      "fieldConfig": {
-        "defaults": {},
-        "overrides": []
-      },
       "gridPos": {
         "h": 3,
         "w": 2,
         "x": 4,
-        "y": 19
+        "y": 37
       },
       "highlightOnMouseover": true,
       "id": 42,
@@ -2919,6 +4024,7 @@
       "title": "Network",
       "type": "natel-discrete-panel",
       "units": "short",
+      "use12HourClock": false,
       "useTimePrecision": false,
       "valueMaps": [
         {
@@ -2947,7 +4053,7 @@
     }
   ],
   "refresh": "10s",
-  "schemaVersion": 27,
+  "schemaVersion": 31,
   "style": "dark",
   "tags": [
     "gotesla"
@@ -2986,5 +4092,5 @@
   "timezone": "",
   "title": "Powerwall",
   "uid": "OPuGDVqmz",
-  "version": 108
+  "version": 5
 }
