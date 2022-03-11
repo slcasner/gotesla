@@ -31,6 +31,9 @@ var InfluxDb string
 // InfluxMeasurement is the name of the InfluxDB measurement
 var InfluxMeasurement string
 
+// InfluxPVACBase is the basename of the InfluxDB measurements for PVAC vitals
+var InfluxPVACBase string
+
 var hostname string
 var email string
 var password string
@@ -130,6 +133,8 @@ func main() {
 		"Influx database name")
 	flag.StringVar(&InfluxMeasurement, "influx-measurement", "powerwall",
 		"Influx measurement name")
+	flag.StringVar(&InfluxPVACBase, "influx-pvac-base", "pvac",
+		"Influx PVAC vitals measurement name")
 	flag.StringVar(&hostname, "hostname", "teg", "Powerwall gateway hostname")
 	flag.StringVar(&email, "email", "", "Email address for login")
 	flag.StringVar(&password, "password", "", "Password for login")
@@ -359,52 +364,6 @@ func main() {
 			bp.AddPoint(pt)
 		}
 
-		// Create a point with the solar inverter current, voltage, power and status variables
-		{
-			tags := map[string]string{}
-
-			fields := map[string]interface{}{
-				"i_out":          vd.PVACs[0].PVACIout,
-				"current_a":      vd.PVACs[0].PVACPVCurrentA,
-				"current_b":      vd.PVACs[0].PVACPVCurrentB,
-				"current_c":      vd.PVACs[0].PVACPVCurrentC,
-				"current_d":      vd.PVACs[0].PVACPVCurrentD,
-				"voltage_a":      vd.PVACs[0].PVACPVMeasuredVoltageA,
-				"voltage_b":      vd.PVACs[0].PVACPVMeasuredVoltageB,
-				"voltage_c":      vd.PVACs[0].PVACPVMeasuredVoltageC,
-				"voltage_d":      vd.PVACs[0].PVACPVMeasuredVoltageD,
-				"power_a":        vd.PVACs[0].PVACPVMeasuredPowerA,
-				"power_b":        vd.PVACs[0].PVACPVMeasuredPowerB,
-				"power_c":        vd.PVACs[0].PVACPVMeasuredPowerC,
-				"power_d":        vd.PVACs[0].PVACPVMeasuredPowerD,
-				"p_out":          vd.PVACs[0].PVACPout,
-				"pv_state":       vd.PVACs[0].PVACState,
-				"grid_state":     vd.PVACs[0].PVACGridState,
-				"inverter_state": vd.PVACs[0].PVACInvState,
-				"pv_state_a":     vd.PVACs[0].PVACPvStateA,
-				"pv_state_b":     vd.PVACs[0].PVACPvStateB,
-				"pv_state_c":     vd.PVACs[0].PVACPvStateC,
-				"pv_state_d":     vd.PVACs[0].PVACPvStateD,
-			}
-			timestamp := time.Unix(int64(vd.PVACs[0].Common.LastCommunicationTime), 0)
-			if err != nil {
-				log.Printf("time.Parse: %v\n", err)
-				continue
-			}
-
-			pt, err := influxClient.NewPoint(
-				InfluxMeasurement,
-				tags,
-				fields,
-				timestamp,
-			)
-			if err != nil {
-				log.Printf("NewPoint: %v\n", err)
-				continue
-			}
-			bp.AddPoint(pt)
-		}
-
 		// Create battery and sum points from system status
 		var i int
 		var totalCharged, totalDischarged int
@@ -446,6 +405,68 @@ func main() {
 		err = dbClient.Write(bp)
 		if err != nil {
 			log.Printf("Write: %v\n", err)
+		}
+
+		// Create a point with the solar inverter current, voltage,
+		// power and status variables.  We do this in a separate
+		// measurement series for each solar inverter.
+		for i := 0; i < len(vd.PVACs); i++ {
+			measurement := fmt.Sprintf("%s%d", InfluxPVACBase, i)
+
+			// Separate batch of data points for PVAC data.
+			bpv, err := influxClient.NewBatchPoints(influxClient.BatchPointsConfig{
+				Database:  InfluxDb,
+				Precision: "s",
+			})
+			if err != nil {
+				log.Printf("NewBatchPoints: %v\n", err)
+				continue
+			}
+
+			tags := map[string]string{}
+
+			fields := map[string]interface{}{
+				"i_out":          vd.PVACs[i].PVACIout,
+				"current_a":      vd.PVACs[i].PVACPVCurrentA,
+				"current_b":      vd.PVACs[i].PVACPVCurrentB,
+				"current_c":      vd.PVACs[i].PVACPVCurrentC,
+				"current_d":      vd.PVACs[i].PVACPVCurrentD,
+				"voltage_a":      vd.PVACs[i].PVACPVMeasuredVoltageA,
+				"voltage_b":      vd.PVACs[i].PVACPVMeasuredVoltageB,
+				"voltage_c":      vd.PVACs[i].PVACPVMeasuredVoltageC,
+				"voltage_d":      vd.PVACs[i].PVACPVMeasuredVoltageD,
+				"power_a":        vd.PVACs[i].PVACPVMeasuredPowerA,
+				"power_b":        vd.PVACs[i].PVACPVMeasuredPowerB,
+				"power_c":        vd.PVACs[i].PVACPVMeasuredPowerC,
+				"power_d":        vd.PVACs[i].PVACPVMeasuredPowerD,
+				"p_out":          vd.PVACs[i].PVACPout,
+				"pv_state":       vd.PVACs[i].PVACState,
+				"grid_state":     vd.PVACs[i].PVACGridState,
+				"inverter_state": vd.PVACs[i].PVACInvState,
+				"pv_state_a":     vd.PVACs[i].PVACPvStateA,
+				"pv_state_b":     vd.PVACs[i].PVACPvStateB,
+				"pv_state_c":     vd.PVACs[i].PVACPvStateC,
+				"pv_state_d":     vd.PVACs[i].PVACPvStateD,
+			}
+			timestamp := time.Unix(int64(vd.PVACs[i].Common.LastCommunicationTime), 0)
+
+			pt, err := influxClient.NewPoint(
+				measurement,
+				tags,
+				fields,
+				timestamp,
+			)
+			if err != nil {
+				log.Printf("NewPoint for PVAC%d: %v\n", i, err)
+				continue
+			}
+			bpv.AddPoint(pt)
+
+			// Write data points in the batch
+			err = dbClient.Write(bpv)
+			if err != nil {
+				log.Printf("Write: %v\n", err)
+			}
 		}
 
 		// If we needed to authenticate, then the authentication

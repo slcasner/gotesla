@@ -1610,7 +1610,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^powerwall\\.last$/",
+          "fields": "/^pvac0\\.last$/",
           "values": false
         },
         "text": {
@@ -1635,7 +1635,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -1672,7 +1672,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "B",
@@ -1709,7 +1709,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "C",
@@ -1746,7 +1746,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "D",
@@ -2315,7 +2315,7 @@
           "calcs": [
             "lastNotNull"
           ],
-          "fields": "/^powerwall\\.last$/",
+          "fields": "/^pvac0\\.last$/",
           "values": false
         },
         "text": {
@@ -2340,7 +2340,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -2358,7 +2358,8 @@
                 "type": "last"
               }
             ]
-          ]
+          ],
+          "tags": []
         },
         {
           "groupBy": [
@@ -2376,7 +2377,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "B",
@@ -2900,7 +2901,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -2937,7 +2938,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "query": "SELECT mean(\"soe\") FROM \"autogen\".\"powerwall\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
@@ -2977,7 +2978,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "C",
@@ -3015,7 +3016,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "D",
@@ -3199,7 +3200,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -3236,7 +3237,7 @@
               "type": "fill"
             }
           ],
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "query": "SELECT mean(\"soe\") FROM \"autogen\".\"powerwall\" WHERE $timeFilter GROUP BY time($__interval) fill(null)",
@@ -3276,7 +3277,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "C",
@@ -3314,7 +3315,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "D",
@@ -3352,7 +3353,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "E",
@@ -3390,7 +3391,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "F",
@@ -3428,7 +3429,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "G",
@@ -3466,7 +3467,7 @@
             }
           ],
           "hide": false,
-          "measurement": "powerwall",
+          "measurement": "pvac0",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "H",
